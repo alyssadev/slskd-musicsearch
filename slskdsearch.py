@@ -68,9 +68,8 @@ def search(album):
             if not track_names:
                 break
         if matches == len([track["title"] for track in album["tracks"]]):
-            print(resp)
             slskd.transfers.enqueue(**resp)
-            #slskd.searches.delete(search["id"])
+            slskd.searches.delete(search["id"])
             return True
         if not matches:
             continue
@@ -104,9 +103,9 @@ def add_album_to_lidarr(release_id, root_folder_index: int=0):
     lidarr_album["addOptions"] = {"searchForNewAlbum": False}
     lidarr_album["artist"]["monitored"] = True
     lidarr_album["artist"]["addOptions"] = {"monitor": "missing", "searchForMissingAlbums": False}
-    print_json(lidarr_album)
+    #print_json(lidarr_album)
     root_folder = lidarr_get_root_folder(root_folder_index)
-    print_json(root_folder)
+    #print_json(root_folder)
     # bring in values configured on root folder
     lidarr_album["artist"]["metadataProfileId"] = root_folder["defaultMetadataProfileId"]
     lidarr_album["artist"]["qualityProfileId"] = root_folder["defaultQualityProfileId"]
